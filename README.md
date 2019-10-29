@@ -1,4 +1,4 @@
-# sample
+# educastle
 
 A new Flutter project.
 
