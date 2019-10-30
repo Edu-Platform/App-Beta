@@ -12,10 +12,13 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return new Center(
-      child: new Text(
-        "Calls",
-        style: new TextStyle(fontSize: 20.0),
-      ),
+      child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Image.asset('assets/banner.jpg')
+            ),
+          ]
+        ),
     );
   }
 }
