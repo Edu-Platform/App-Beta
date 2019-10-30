@@ -1,11 +1,59 @@
 import 'package:flutter/material.dart';
 
-import 'pages/home_screen.dart';
-import 'pages/map_screen.dart';
+import 'home_screen.dart';
+import 'map_screen.dart';
+
+import 'app_model.dart';
+import 'place.dart';
+import 'stub_data.dart';
+
+enum PlaceTrackerViewType {
+  map,
+  list,
+}
+
+class EduCastleApp extends StatefulWidget {
+
+@override
+  _EduCastleState createState() => _EduCastleState();
+
+}
+
+class _EduCastleState extends State<EduCastleApp> {
+  AppState appState = AppState();
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Educastle',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      builder: (context, child) {
+        return AppModel<AppState>(
+          initialState: AppState(),
+          child: child,
+        );
+      },
+      home: EduCastleHome(title: 'Sample'),
+    );
+  }
+
+}
 
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class EduCastleHome extends StatefulWidget {
+  EduCastleHome({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,10 +67,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _EduCastleHomeState createState() => _EduCastleHomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _EduCastleHomeState extends State<EduCastleHome>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
@@ -35,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage>
     });
   }
   
-
   @override
   Widget build(BuildContext context) {
     // The Flutter framework has been optimized to make rerunning build methods
@@ -43,8 +90,6 @@ class _MyHomePageState extends State<MyHomePage>
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         bottom: TabBar(
           controller: _tabController,
@@ -67,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage>
         ],
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: <Widget>[
           HomeScreen(),
@@ -77,3 +123,65 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 }
+
+
+class AppState {
+  const AppState({
+    this.places = StubData.places,
+    this.selectedCategory = PlaceCategory.favorite,
+    this.viewType = PlaceTrackerViewType.map,
+  })  : assert(places != null),
+        assert(selectedCategory != null);
+
+  final List<Place> places;
+  final PlaceCategory selectedCategory;
+  final PlaceTrackerViewType viewType;
+
+  AppState copyWith({
+    List<Place> places,
+    PlaceCategory selectedCategory,
+    PlaceTrackerViewType viewType,
+  }) {
+    return AppState(
+      places: places ?? this.places,
+      selectedCategory: selectedCategory ?? this.selectedCategory,
+      viewType: viewType ?? this.viewType,
+    );
+  }
+
+  static AppState of(BuildContext context) => AppModel.of<AppState>(context);
+
+  static void update(BuildContext context, AppState newState) {
+    AppModel.update<AppState>(context, newState);
+  }
+
+  static void updateWith(
+    BuildContext context, {
+    List<Place> places,
+    PlaceCategory selectedCategory,
+    PlaceTrackerViewType viewType,
+  }) {
+    update(
+      context,
+      AppState.of(context).copyWith(
+        places: places,
+        selectedCategory: selectedCategory,
+        viewType: viewType,
+      ),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other.runtimeType != runtimeType) return false;
+    return other is AppState &&
+        other.places == places &&
+        other.selectedCategory == selectedCategory &&
+        other.viewType == viewType;
+  }
+
+  @override
+  int get hashCode => hashValues(places, selectedCategory, viewType);
+}
+

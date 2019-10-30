@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'place_list.dart';
 import 'place_map.dart';
+import 'educastle_app.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -13,13 +14,18 @@ class MapScreen extends StatefulWidget {
 
 class MapScreenState extends State<MapScreen> {
 
+
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
+      index: 
+          AppState.of(context).viewType == PlaceTrackerViewType.map ? 0 : 1,
       children: <Widget>[
-          PlaceMap(center: const LatLng(45.521563, -122.677433)),
+          PlaceMap(center: const LatLng(37.350078,127.1067633)),
           PlaceList(),
-        ],
+      ],
     );
   }
 }
+
+
