@@ -99,7 +99,7 @@ class _EduCastleHomeState extends State<EduCastleHome>
               text: "홈화면",
             ),
             Tab(
-              text: "지도",
+              text: "찾기",
             ),
           ],
         ),

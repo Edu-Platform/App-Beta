@@ -10,7 +10,7 @@ class StubData {
       name: 'Deschutes Brewery',
       description:
           'Beers brewed on-site & gourmet pub grub in a converted auto-body shop with a fireplace & wood beams.',
-      category: PlaceCategory.wantToGo,
+      category: PlaceCategory.favorite,
       starRating: 5,
     ),
     Place(
@@ -19,7 +19,7 @@ class StubData {
       name: 'Luc Lac Vietnamese Kitchen',
       description:
           'Popular counter-serve offering pho, banh mi & other Vietnamese favorites in a stylish setting.',
-      category: PlaceCategory.wantToGo,
+      category: PlaceCategory.favorite,
       starRating: 5,
     ),
   ];

@@ -32,10 +32,12 @@ class PlaceListState extends State<PlaceList> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        /*
         _ListCategoryButtonBar(
           selectedCategory: AppState.of(context).selectedCategory,
           onCategoryChanged: (value) => _onCategoryChanged(value),
         ),
+        */
         Expanded(
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
