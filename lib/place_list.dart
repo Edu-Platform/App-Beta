@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'place.dart';
 import 'place_details.dart';
+import 'details_page.dart';
 import 'educastle_app.dart';
 
 class PlaceList extends StatefulWidget {
@@ -32,12 +33,10 @@ class PlaceListState extends State<PlaceList> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        /*
+        
         _ListCategoryButtonBar(
           selectedCategory: AppState.of(context).selectedCategory,
-          onCategoryChanged: (value) => _onCategoryChanged(value),
         ),
-        */
         Expanded(
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
@@ -77,10 +76,16 @@ class _PlaceListTile extends StatelessWidget {
       onTap: () => Navigator.push<void>(
         context,
         MaterialPageRoute(builder: (context) {
+          return DetailsPage(
+            place: place,
+            onChanged: (value) => onPlaceChanged(value),
+          );
+          /*
           return PlaceDetails(
             place: place,
             onChanged: (value) => onPlaceChanged(value),
           );
+          */
         }),
       ),
       child: Container(
@@ -130,89 +135,30 @@ class _ListCategoryButtonBar extends StatelessWidget {
   const _ListCategoryButtonBar({
     Key key,
     @required this.selectedCategory,
-    @required this.onCategoryChanged,
   })  : assert(selectedCategory != null),
-        assert(onCategoryChanged != null),
         super(key: key);
 
   final PlaceCategory selectedCategory;
-  final ValueChanged<PlaceCategory> onCategoryChanged;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        _CategoryButton(
-          category: PlaceCategory.favorite,
-          selected: selectedCategory == PlaceCategory.favorite,
-          onCategoryChanged: onCategoryChanged,
-        ),
-        _CategoryButton(
-          category: PlaceCategory.visited,
-          selected: selectedCategory == PlaceCategory.visited,
-          onCategoryChanged: onCategoryChanged,
-        ),
-        _CategoryButton(
-          category: PlaceCategory.wantToGo,
-          selected: selectedCategory == PlaceCategory.wantToGo,
-          onCategoryChanged: onCategoryChanged,
+        new IconButton(
+          icon: new Icon(Icons.map, size: 36), 
+          onPressed: () => {
+            AppState.updateWith(
+              context,
+              viewType:
+                  AppState.of(context).viewType == PlaceTrackerViewType.map
+                      ? PlaceTrackerViewType.list
+                      : PlaceTrackerViewType.map,
+            )
+          },
         ),
       ],
-    );
-  }
-}
-
-class _CategoryButton extends StatelessWidget {
-  const _CategoryButton({
-    Key key,
-    @required this.category,
-    @required this.selected,
-    @required this.onCategoryChanged,
-  })  : assert(category != null),
-        assert(selected != null),
-        super(key: key);
-
-  final PlaceCategory category;
-  final bool selected;
-  final ValueChanged<PlaceCategory> onCategoryChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    String _buttonText;
-    switch (category) {
-      case PlaceCategory.favorite:
-        _buttonText = 'Favorites';
-        break;
-      case PlaceCategory.visited:
-        _buttonText = 'Visited';
-        break;
-      case PlaceCategory.wantToGo:
-        _buttonText = 'Want To Go';
-    }
-
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 12.0),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: selected ? Colors.blue : Colors.transparent,
-          ),
-        ),
-      ),
-      child: ButtonTheme(
-        height: 50.0,
-        child: FlatButton(
-          child: Text(
-            _buttonText,
-            style: TextStyle(
-              fontSize: selected ? 20.0 : 18.0,
-              color: selected ? Colors.blue : Colors.black87,
-            ),
-          ),
-          onPressed: () => onCategoryChanged(category),
-        ),
-      ),
+      
     );
   }
 }
