@@ -24,60 +24,56 @@ class HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 150.0,
-                width: 300.0,
+                height: 180.0,
+                //width: 400.0,
+                width: double.infinity, 
                 child: Carousel(
                   images: [
                     ExactAssetImage("assets/banner.jpg"),
-                    NetworkImage('https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
-                    NetworkImage('https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
+                    NetworkImage('https://cdn.pixabay.com/photo/2015/06/02/12/59/narrative-794978_960_720.jpg'),
+                    NetworkImage('https://cdn.pixabay.com/photo/2015/07/28/22/05/child-865116_960_720.jpg'),
                   ],
                 ),
               ),
             ),
-            /*
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: Stack(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(
-                          "https://s3.amazonaws.com/wll-community-production/images/no-avatar.png"),
+          ),
+
+          Center(
+            child: RaisedButton(
+              padding: EdgeInsets.all(8.0),
+              color: Colors.teal,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 45.0,
                     ),
-                    Positioned(
-                      bottom: 0.0,
-                      right: 1.0,
-                      child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          shape: BoxShape.circle,
-                        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
+                      "학원찾기",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                    )
-                  ],
-                ),
-                title: Text(
-                  "My Status",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text("Tap to add status update"),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            */
+              onPressed: () {
+                print('find academy');
+              },
+            )
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Viewed updates",
+              "인기 강의 목록",
               style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
             ),
           ),
@@ -93,11 +89,43 @@ class HomeScreenState extends State<HomeScreen> {
                       backgroundImage: NetworkImage(
                           "https://pbs.twimg.com/media/EClDvMXU4AAw_lt?format=jpg&name=medium"),
                     ),
-                    title: Text(
-                      "Pawan Kumar",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    title: new Row(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "솔루션 수학학원",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                          alignment: Alignment.centerRight,
+                          child: Text("강의료 30만원"),
+                        ),
+                      ],
                     ),
-                    subtitle: Text("Today, 20:16 PM"),
+                    subtitle: new Row(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("중1 수학 월 수 금"),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                          alignment: Alignment.center,
+                          child: Text("오후 6시 ~ 8시"),
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          child: Text("김혜영쌤"),
+                        ),
+                      ],
+                    ),
+                    isThreeLine: false,
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute()),
@@ -112,16 +140,5 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
     
-    /*
-    return new Center(
-      child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Image.asset('assets/banner.jpg')
-            ),
-          ],
-      ),    
-    );
-    */
   }
 }

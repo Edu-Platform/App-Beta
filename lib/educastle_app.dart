@@ -77,7 +77,7 @@ class _EduCastleHomeState extends State<EduCastleHome>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, initialIndex: 1, length: 2);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -105,6 +105,10 @@ class _EduCastleHomeState extends State<EduCastleHome>
         ),
         actions: <Widget>[
           Icon(Icons.search),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          ),
+          Icon(Icons.notifications),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
           ),
