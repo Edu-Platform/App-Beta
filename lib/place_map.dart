@@ -21,7 +21,9 @@ class PlaceMap extends StatefulWidget {
 }
 
 class PlaceMapState extends State<PlaceMap> {
-  static BitmapDescriptor _getPlaceMarkerIcon(PlaceCategory category) {
+  static BitmapDescriptor _getPlaceMarkerIcon() {
+    return BitmapDescriptor.defaultMarker;
+    /*
     switch (category) {
       case PlaceCategory.favorite:
         return BitmapDescriptor.fromAsset('assets/heart.png');
@@ -33,6 +35,7 @@ class PlaceMapState extends State<PlaceMap> {
       default:
         return BitmapDescriptor.defaultMarker;
     }
+    */
   }
 
   static List<Place> _getPlacesForCategory(
@@ -84,8 +87,9 @@ class PlaceMapState extends State<PlaceMap> {
         snippet: '${place.starRating} Star Rating',
         onTap: () => _pushPlaceDetailsScreen(place),
       ),
-      icon: _getPlaceMarkerIcon(place.category),
-      visible: place.category == AppState.of(context).selectedCategory,
+      icon: _getPlaceMarkerIcon(),
+      //visible: place.category == AppState.of(context).selectedCategory,
+      visible: true,
     );
     _markedPlaces[marker] = place;
     return marker;
@@ -289,7 +293,7 @@ class _MapFabs extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FloatingActionButton(
-              heroTag: 'add_place_button',
+              heroTag: 'list_button',
               onPressed: () {
                 AppState.updateWith(
                   context,
@@ -302,7 +306,13 @@ class _MapFabs extends StatelessWidget {
               mini: true,
               materialTapTargetSize: MaterialTapTargetSize.padded,
               backgroundColor: Colors.green,
-              child: const Icon(Icons.list, size: 36.0),
+              //child: const Icon(Icons.list, size: 36.0),
+              child: Column( // Replace with a Row for horizontal icon + text
+                  children: <Widget>[
+                    Icon(Icons.list),
+                    Text("목록")
+                  ],
+                ),
             ),
           ],
         ),

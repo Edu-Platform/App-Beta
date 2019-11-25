@@ -7,7 +7,7 @@ class StubData {
     Place(
       id: '1',
       latLng: LatLng(37.3496733,127.1090892),
-      name: 'Deschutes Brewery',
+      name: '솔루션수학학원 중등부',
       description:
           'Beers brewed on-site & gourmet pub grub in a converted auto-body shop with a fireplace & wood beams.',
       category: PlaceCategory.favorite,
@@ -16,7 +16,7 @@ class StubData {
     Place(
       id: '2',
       latLng: LatLng(37.351591,127.1047463),
-      name: 'Luc Lac Vietnamese Kitchen',
+      name: '수학대가 미금캠퍼스',
       description:
           'Popular counter-serve offering pho, banh mi & other Vietnamese favorites in a stylish setting.',
       category: PlaceCategory.favorite,
