@@ -4,6 +4,7 @@ import 'place.dart';
 import 'place_details.dart';
 import 'details_page.dart';
 import 'educastle_app.dart';
+import 'filter_widget.dart';
 
 class PlaceList extends StatefulWidget {
   const PlaceList({Key key}) : super(key: key);
@@ -146,7 +147,20 @@ class _ListCategoryButtonBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new IconButton(
-          icon: new Icon(Icons.map, size: 36), 
+          color: Colors.blue,
+          icon: new Icon(Icons.filter_list, size: 40), 
+          onPressed: () => {
+            Navigator.push(context, MaterialPageRoute<Null>(
+              builder: (BuildContext context) {
+                return filterWidget();
+              },
+              fullscreenDialog: true,
+            ))
+          },
+        ),
+        new IconButton(
+          color: Colors.blue,
+          icon: new Icon(Icons.map, size: 40), 
           onPressed: () => {
             AppState.updateWith(
               context,

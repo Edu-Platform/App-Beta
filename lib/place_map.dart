@@ -306,13 +306,9 @@ class _MapFabs extends StatelessWidget {
               mini: true,
               materialTapTargetSize: MaterialTapTargetSize.padded,
               backgroundColor: Colors.green,
-              //child: const Icon(Icons.list, size: 36.0),
-              child: Column( // Replace with a Row for horizontal icon + text
-                  children: <Widget>[
-                    Icon(Icons.list),
-                    Text("목록")
-                  ],
-                ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              //foregroundColor: Colors.pink,
+              child: const Icon(Icons.list, size: 36.0),
             ),
           ],
         ),
