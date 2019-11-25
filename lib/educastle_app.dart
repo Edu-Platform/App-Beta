@@ -45,7 +45,7 @@ class _EduCastleState extends State<EduCastleApp> {
           child: child,
         );
       },
-      home: EduCastleHome(title: 'Sample'),
+      home: EduCastleHome(title: 'Edu'),
     );
   }
 
