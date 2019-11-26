@@ -55,7 +55,6 @@ class DetailsPageState extends State<DetailsPage> {
       padding: const EdgeInsets.fromLTRB(24.0, 12.0, 24.0, 12.0),
       scrollDirection: Axis.vertical,
       children: <Widget>[
-        //Image.network("https://www.youtube.com/redirect?v=6C5qvdUEfNc&event=video_description&q=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1503875154399-95d2b151e3b0%3Fixlib%3Drb-1.2.1%26auto%3Dformat%26fit%3Dcrop%26w%3D500%26q%3D60&redir_token=cAXnWGhz5ucMoGH0fggTQp2Q4WB8MTU3MzU0MDE3NkAxNTczNDUzNzc2"),
         Card1(),
       ],
 
@@ -68,17 +67,92 @@ class DetailsPageState extends State<DetailsPage> {
       appBar: AppBar(
         title: Text('${_place.name}'),
         backgroundColor: Colors.green[700],
-        
       ),
+      body: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                child: Hero(
+                  tag: 'imageHero',
+                  child: Image.network(
+                    "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80"
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return DetailScreen();
+                  }));
+                },
+              ),
+            ),
+            
+            /*
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  height: 260.0,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(
+                              "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80")
+                      )
+                  )
+              ),
+            ),
+            */
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Text('4.8 29개 리뷰',
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 20.0),),
+              ),
+            ),
+            Divider(color: Colors.blueGrey, height: 10.0,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.center,
+                child: Wrap(
+                  spacing: 10.0,
+                  children: <Widget>[
+                    new IconButton(icon: new Icon(Icons.pin_drop)),
+                    new IconButton(icon: new Icon(Icons.favorite)),
+                    new IconButton(icon: new Icon(Icons.info)),
+                    new IconButton(icon: new Icon(Icons.record_voice_over)),
+                    //new IconButton(icon: new Icon(Icons.group)),
+                  ]
+                ),
+              )
+            )
+          ],
+        ),
+      ),
+
+      /*
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: _detailsBody(),
       ),
+      */
     );
   }
 }
+
+
+
+
+
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -236,6 +310,50 @@ class Card1 extends StatelessWidget {
           ),
         ),
       )
+    );
+  }
+}
+
+
+class DetailScreen extends StatelessWidget {
+  final List<String> litems = [
+  "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80",
+  "https://images.unsplash.com/photo-1574714802271-15a6dbfdff96?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+  "https://images.unsplash.com/photo-1574643065590-89f6c555687f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      
+      body: Listener(onPointerMove: (opm) {
+          print("onPointerMove .. ${opm.position}");
+        }, 
+        child: ListView.builder(
+          itemCount: litems.length,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: EdgeInsets.all(20.0),
+              child: Image.network(litems[index]),
+            );
+          },
+        )
+      ),
+      /*
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: 'imageHero',
+            child: Image.network(
+              "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80"
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      */
     );
   }
 }

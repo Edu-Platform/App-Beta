@@ -152,7 +152,7 @@ class _ListCategoryButtonBar extends StatelessWidget {
           onPressed: () => {
             Navigator.push(context, MaterialPageRoute<Null>(
               builder: (BuildContext context) {
-                return filterWidget();
+                return FilterWidget();
               },
               fullscreenDialog: true,
             ))

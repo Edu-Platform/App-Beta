@@ -21,8 +21,8 @@ class MapScreenState extends State<MapScreen> {
       index: 
           AppState.of(context).viewType == PlaceTrackerViewType.map ? 0 : 1,
       children: <Widget>[
-          PlaceMap(center: const LatLng(37.350078,127.1067633)),
           PlaceList(),
+          PlaceMap(center: const LatLng(37.350078,127.1067633)),
       ],
     );
   }
