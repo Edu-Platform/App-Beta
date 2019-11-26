@@ -41,7 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
           Center(
             child: RaisedButton(
               padding: EdgeInsets.all(8.0),
-              color: Colors.teal,
+              color: Colors.blue,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -50,7 +50,7 @@ class HomeScreenState extends State<HomeScreen> {
                     child: Icon(
                       Icons.home,
                       color: Colors.white,
-                      size: 45.0,
+                      size: 35.0,
                     ),
                   ),
                   Padding(
