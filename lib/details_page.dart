@@ -101,8 +101,27 @@ class DetailsPageState extends State<DetailsPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.star,
+                      color: Colors.green,
+                      size: 30.0,
+                    ),
+                    Text('4.8',
+                      style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 25.0),
+                    ),
+                    Text('   29개 리뷰',
+                      style: TextStyle(color: Colors.blueGrey, fontSize: 18.0),
+                    ),
+
+                  ],
+                )
+                /*
                 child: Text('4.8 29개 리뷰',
                   style: TextStyle(color: Colors.blueGrey, fontSize: 20.0),),
+                */
               ),
             ),
             Divider(color: Colors.blueGrey, height: 10.0,),
@@ -121,10 +140,44 @@ class DetailsPageState extends State<DetailsPage> {
                   ]
                 ),
               )
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "강의 목록",
+                style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                color: Colors.white,
+                child: ListView(
+                  children: <Widget>[
+                    Divider(
+                      color: Colors.black,
+                    ),
+                    ListTile(
+                      title: Text('중1 수학   월 수 금'),
+                      trailing: Icon(Icons.arrow_right),
+                    ),
+                    Divider(
+                      color: Colors.black,
+                    ),
+                    ListTile(
+                      title: Text('고2 수학   화 목'),
+                      trailing: Icon(Icons.arrow_right),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
+      
+
 
     );
   }
