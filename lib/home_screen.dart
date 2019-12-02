@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
+import 'details_page.dart';
+import 'place.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   HomeScreenState createState() {
@@ -9,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +131,12 @@ class HomeScreenState extends State<HomeScreen> {
                     ),
                     isThreeLine: false,
                     onTap: () => Navigator.push(
+                        
                         context,
-                        MaterialPageRoute()),
-
+                        MaterialPageRoute<void>(builder: (BuildContext context) {
+                          return DetailsPage();
+                        })
+                    ),
                             //builder: (context) => StoryPageView())),
                   ),
                 ],

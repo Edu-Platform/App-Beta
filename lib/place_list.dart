@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'place.dart';
-import 'place_details.dart';
 import 'details_page.dart';
 import 'educastle_app.dart';
 import 'filter_widget.dart';
@@ -81,12 +80,6 @@ class _PlaceListTile extends StatelessWidget {
             place: place,
             onChanged: (value) => onPlaceChanged(value),
           );
-          /*
-          return PlaceDetails(
-            place: place,
-            onChanged: (value) => onPlaceChanged(value),
-          );
-          */
         }),
       ),
       child: Container(

@@ -25,8 +25,8 @@ class StubData {
   ];
 
   static const List<String> reviewStrings = [
-    'My favorite place in Portand. The employees are wonderful and so is the food. I go here at least once a month!',
-    'Staff was very friendly. Great atmosphere and good music. Would reccommend.',
+    '이번 중간고사에서 혜영쌤 덕분에 점수 많이 올랐어요!',
+    '졸립지 않고 재미있게 가르쳐 주십니다.',
     'Best. Place. In. Town. Period.'
   ];
 }

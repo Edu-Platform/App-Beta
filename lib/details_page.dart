@@ -4,11 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'place.dart';
+import 'detail/review.dart';
 import 'stub_data.dart';
-import 'package:expandable/expandable.dart';
 
 
 class DetailsPage extends StatefulWidget {
+  
   const DetailsPage({
     @required this.place,
     @required this.onChanged,
@@ -25,7 +26,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class DetailsPageState extends State<DetailsPage> {
-    Place _place;
+  Place _place;
   GoogleMapController _mapController;
   final Set<Marker> _markers = {};
 
@@ -50,6 +51,20 @@ class DetailsPageState extends State<DetailsPage> {
     });
   }
 
+  Future navigateToSubPage(context, name) async {
+    switch (name) {
+      case 'review':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
+        break;
+      case 'curriculum':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
+        break;
+      case 'teacher':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +87,7 @@ class DetailsPageState extends State<DetailsPage> {
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return DetailScreen();
+                    return PhotosScreen();
                   }));
                 },
               ),
@@ -101,27 +116,26 @@ class DetailsPageState extends State<DetailsPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.star,
-                      color: Colors.green,
-                      size: 30.0,
-                    ),
-                    Text('4.8',
-                      style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 25.0),
-                    ),
-                    Text('   29개 리뷰',
-                      style: TextStyle(color: Colors.blueGrey, fontSize: 18.0),
-                    ),
+                child: InkWell(
+                  onTap: () => navigateToSubPage(context, 'review'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.star,
+                        color: Colors.green,
+                        size: 30.0,
+                      ),
+                      Text('4.8',
+                        style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 25.0),
+                      ),
+                      Text('   29개 리뷰',
+                        style: TextStyle(color: Colors.blueGrey, fontSize: 18.0),
+                      ),
 
-                  ],
-                )
-                /*
-                child: Text('4.8 29개 리뷰',
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 20.0),),
-                */
+                    ],
+                  )
+                ),
               ),
             ),
             Divider(color: Colors.blueGrey, height: 10.0,),
@@ -134,8 +148,18 @@ class DetailsPageState extends State<DetailsPage> {
                   children: <Widget>[
                     new IconButton(icon: new Icon(Icons.pin_drop)),
                     new IconButton(icon: new Icon(Icons.favorite)),
-                    new IconButton(icon: new Icon(Icons.info)),
-                    new IconButton(icon: new Icon(Icons.record_voice_over)),
+                    new IconButton(
+                      icon: new Icon(Icons.info),
+                      onPressed: () {
+                        navigateToSubPage(context, 'curriculum');
+                      }
+                    ),
+                    new IconButton(
+                      icon: new Icon(Icons.record_voice_over),
+                      onPressed: () {
+                        navigateToSubPage(context, 'teacher');
+                      }
+                    ),
                     //new IconButton(icon: new Icon(Icons.group)),
                   ]
                 ),
@@ -173,6 +197,12 @@ class DetailsPageState extends State<DetailsPage> {
                 ),
               ),
             ),
+            _Map(
+              center: _place.latLng,
+              mapController: _mapController,
+              onMapCreated: _onMapCreated,
+              markers: _markers,
+            ),
           ],
         ),
       ),
@@ -183,10 +213,7 @@ class DetailsPageState extends State<DetailsPage> {
   }
 }
 
-
-
-
-class DetailScreen extends StatelessWidget {
+class PhotosScreen extends StatelessWidget {
   final List<String> litems = [
   "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80",
   "https://images.unsplash.com/photo-1574714802271-15a6dbfdff96?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
@@ -225,6 +252,47 @@ class DetailScreen extends StatelessWidget {
         },
       ),
       */
+    );
+  }
+}
+
+class _Map extends StatelessWidget {
+  const _Map({
+    @required this.center,
+    @required this.mapController,
+    @required this.onMapCreated,
+    @required this.markers,
+    Key key,
+  })  : assert(center != null),
+        assert(onMapCreated != null),
+        super(key: key);
+
+  final LatLng center;
+  final GoogleMapController mapController;
+  final ArgumentCallback<GoogleMapController> onMapCreated;
+  final Set<Marker> markers;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      elevation: 4.0,
+      child: SizedBox(
+        width: 340.0,
+        height: 240.0,
+        child: GoogleMap(
+          onMapCreated: onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: center,
+            zoom: 16.0,
+          ),
+          markers: markers,
+          zoomGesturesEnabled: false,
+          rotateGesturesEnabled: false,
+          tiltGesturesEnabled: false,
+          scrollGesturesEnabled: false,
+        ),
+      ),
     );
   }
 }
