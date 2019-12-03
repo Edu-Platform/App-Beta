@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:http/http.dart' as http;
 
 import 'details_page.dart';
 import 'place.dart';
@@ -12,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-
 
   @override
   Widget build(BuildContext context) {
