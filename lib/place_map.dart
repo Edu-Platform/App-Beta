@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'place.dart';
-import 'place_details.dart';
+import 'details_page.dart';
 import 'educastle_app.dart';
 
 class PlaceMap extends StatefulWidget {
@@ -85,7 +85,7 @@ class PlaceMapState extends State<PlaceMap> {
       infoWindow: InfoWindow(
         title: place.name,
         snippet: '${place.starRating} Star Rating',
-        onTap: () => _pushPlaceDetailsScreen(place),
+        onTap: () => _pushDetailsScreen(place),
       ),
       icon: _getPlaceMarkerIcon(),
       //visible: place.category == AppState.of(context).selectedCategory,
@@ -95,13 +95,13 @@ class PlaceMapState extends State<PlaceMap> {
     return marker;
   }
 
-  void _pushPlaceDetailsScreen(Place place) {
+  void _pushDetailsScreen(Place place) {
     assert(place != null);
 
     Navigator.push<void>(
       context,
       MaterialPageRoute(builder: (context) {
-        return PlaceDetails(
+        return DetailsPage(
           place: place,
           onChanged: (value) => _onPlaceChanged(value),
         );

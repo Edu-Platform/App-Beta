@@ -5,7 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'place.dart';
 import 'detail/review.dart';
-import 'stub_data.dart';
+import 'detail/curriculum.dart';
+import 'detail/teacher.dart';
 
 
 class DetailsPage extends StatefulWidget {
@@ -51,20 +52,6 @@ class DetailsPageState extends State<DetailsPage> {
     });
   }
 
-  Future navigateToSubPage(context, name) async {
-    switch (name) {
-      case 'review':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
-        break;
-      case 'curriculum':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
-        break;
-      case 'teacher':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,27 +79,6 @@ class DetailsPageState extends State<DetailsPage> {
                 },
               ),
             ),
-            
-            /*
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: 260.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(
-                              "https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80")
-                      )
-                  )
-              ),
-            ),
-            */
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -211,6 +177,21 @@ class DetailsPageState extends State<DetailsPage> {
 
     );
   }
+
+  Future navigateToSubPage(context, name) async {
+    switch (name) {
+      case 'review':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Review()));
+        break;
+      case 'curriculum':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Curriculum()));
+        break;
+      case 'teacher':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Teacher()));
+        break;
+    }
+  }
+
 }
 
 class PhotosScreen extends StatelessWidget {
