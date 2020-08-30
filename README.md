@@ -1,6 +1,5 @@
-# educastle
+# 에듀캐슬 App
 
-A new Flutter project.
 
 ## Documentation
 
